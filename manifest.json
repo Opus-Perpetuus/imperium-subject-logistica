@@ -1,0 +1,210 @@
+{
+  "id": "SUBJECT-logistica",
+  "technicalId": "subject-logistica",
+  "name": "Logística",
+  "version": "0.1.0",
+  "image": "ghcr.io/opus-perpetuus/subject-logistica:0.1.0",
+  "compat": {
+    "nox": ">=0.5.0",
+    "kit": "^0.5.0"
+  },
+  "api": {
+    "basePath": "/",
+    "port": 3000,
+    "healthPath": "/health"
+  },
+  "permissions": [
+    {
+      "id": "subject.logistica.delivery-return.read",
+      "label": "Ver Devoluciones"
+    },
+    {
+      "id": "subject.logistica.delivery-return.write",
+      "label": "Editar Devoluciones"
+    },
+    {
+      "id": "subject.logistica.delivery-package.read",
+      "label": "Ver Bultos"
+    },
+    {
+      "id": "subject.logistica.delivery-package.write",
+      "label": "Editar Bultos"
+    },
+    {
+      "id": "subject.logistica.pedidos.read",
+      "label": "Ver Pedidos por empacar"
+    },
+    {
+      "id": "subject.logistica.pedidos.write",
+      "label": "Editar Pedidos por empacar"
+    },
+    {
+      "id": "subject.logistica.delivery-package-manifiesto.read",
+      "label": "Ver Manifiesto de carga"
+    },
+    {
+      "id": "subject.logistica.delivery-package-manifiesto.write",
+      "label": "Editar Manifiesto de carga"
+    },
+    {
+      "id": "subject.logistica.reparto.read",
+      "label": "Ver Reparto (chofer)"
+    },
+    {
+      "id": "subject.logistica.reparto.write",
+      "label": "Editar Reparto (chofer)"
+    },
+    {
+      "id": "subject.logistica.entregas.read",
+      "label": "Ver Cola chofer (carga/entrega)"
+    },
+    {
+      "id": "subject.logistica.entregas.write",
+      "label": "Editar Cola chofer (carga/entrega)"
+    },
+    {
+      "id": "subject.logistica.delivery-route.read",
+      "label": "Ver Rutas de entrega"
+    },
+    {
+      "id": "subject.logistica.delivery-route.write",
+      "label": "Editar Rutas de entrega"
+    },
+    {
+      "id": "subject.logistica.delivery-route-mapa.read",
+      "label": "Ver Mapa de rutas"
+    },
+    {
+      "id": "subject.logistica.delivery-route-mapa.write",
+      "label": "Editar Mapa de rutas"
+    }
+  ],
+  "pages": [
+    {
+      "id": "logistica.delivery-return",
+      "path": "delivery-return",
+      "permission": "subject.logistica.delivery-return.read"
+    },
+    {
+      "id": "logistica.delivery-package",
+      "path": "delivery-package",
+      "permission": "subject.logistica.delivery-package.read"
+    },
+    {
+      "id": "logistica.pedidos",
+      "path": "pedidos",
+      "permission": "subject.logistica.pedidos.read"
+    },
+    {
+      "id": "logistica.delivery-package-manifiesto",
+      "path": "delivery-package-manifiesto",
+      "permission": "subject.logistica.delivery-package-manifiesto.read"
+    },
+    {
+      "id": "logistica.reparto",
+      "path": "reparto",
+      "permission": "subject.logistica.reparto.read"
+    },
+    {
+      "id": "logistica.entregas",
+      "path": "entregas",
+      "permission": "subject.logistica.entregas.read"
+    },
+    {
+      "id": "logistica.delivery-route",
+      "path": "delivery-route",
+      "permission": "subject.logistica.delivery-route.read"
+    },
+    {
+      "id": "logistica.delivery-route-mapa",
+      "path": "delivery-route-mapa",
+      "permission": "subject.logistica.delivery-route-mapa.read"
+    }
+  ],
+  "menu": [
+    {
+      "id": "logistica.root",
+      "label": "Logística",
+      "order": 0,
+      "children": [
+        {
+          "id": "logistica.pedidos",
+          "label": "Pedidos por empacar",
+          "order": -1,
+          "pageId": "logistica.pedidos",
+          "path": "pedidos",
+          "permission": "subject.logistica.pedidos.read"
+        },
+        {
+          "id": "logistica.delivery-package",
+          "label": "Bultos",
+          "order": 0,
+          "pageId": "logistica.delivery-package",
+          "path": "delivery-package",
+          "permission": "subject.logistica.delivery-package.read"
+        },
+        {
+          "id": "logistica.delivery-route",
+          "label": "Rutas de entrega",
+          "order": 0,
+          "pageId": "logistica.delivery-route",
+          "path": "delivery-route",
+          "permission": "subject.logistica.delivery-route.read"
+        },
+        {
+          "id": "logistica.delivery-package-manifiesto",
+          "label": "Manifiesto de carga",
+          "order": 1,
+          "pageId": "logistica.delivery-package-manifiesto",
+          "path": "delivery-package-manifiesto",
+          "permission": "subject.logistica.delivery-package-manifiesto.read"
+        },
+        {
+          "id": "logistica.delivery-route-mapa",
+          "label": "Mapa de rutas",
+          "order": 2,
+          "pageId": "logistica.delivery-route-mapa",
+          "path": "delivery-route-mapa",
+          "permission": "subject.logistica.delivery-route-mapa.read"
+        },
+        {
+          "id": "logistica.reparto",
+          "label": "Reparto (chofer)",
+          "order": 3,
+          "pageId": "logistica.reparto",
+          "path": "reparto",
+          "permission": "subject.logistica.reparto.read"
+        },
+        {
+          "id": "logistica.entregas",
+          "label": "Cola chofer (carga/entrega)",
+          "order": 4,
+          "pageId": "logistica.entregas",
+          "path": "entregas",
+          "permission": "subject.logistica.entregas.read"
+        },
+        {
+          "id": "logistica.delivery-return",
+          "label": "Devoluciones",
+          "order": 5,
+          "pageId": "logistica.delivery-return",
+          "path": "delivery-return",
+          "permission": "subject.logistica.delivery-return.read"
+        }
+      ]
+    }
+  ],
+  "storage": {
+    "domain": "shared-nox-postgres"
+  },
+  "resources": {
+    "delivery-return": "delivery_return",
+    "delivery-package": "delivery_package",
+    "pedidos": "pedidos",
+    "delivery-package-manifiesto": "delivery_package_manifiesto",
+    "reparto": "reparto",
+    "entregas": "entregas",
+    "delivery-route": "delivery_route",
+    "delivery-route-mapa": "delivery_route_mapa"
+  }
+}
