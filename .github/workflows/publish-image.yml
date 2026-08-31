@@ -28,5 +28,3 @@ jobs:
             -t ghcr.io/opus-perpetuus/subject-logistica:latest \
             --push \
             .
-          docker push ghcr.io/opus-perpetuus/subject-logistica:0.1.0
-          docker push ghcr.io/opus-perpetuus/subject-logistica:latest
