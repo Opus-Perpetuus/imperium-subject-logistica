@@ -79,6 +79,87 @@
       "label": "Editar Mapa de rutas"
     }
   ],
+  "menu": [
+    {
+      "id": "logistica.root",
+      "label": "Logística",
+      "order": 0,
+      "children": [
+        {
+          "id": "logistica.pedidos",
+          "label": "Pedidos por empacar",
+          "pageId": "logistica.pedidos",
+          "order": -1,
+          "path": "pedidos",
+          "permission": "subject.logistica.pedidos.read",
+          "icon": "document"
+        },
+        {
+          "id": "logistica.delivery-package",
+          "label": "Bultos",
+          "pageId": "logistica.delivery-package",
+          "order": 0,
+          "path": "delivery-package",
+          "permission": "subject.logistica.delivery-package.read",
+          "icon": "document"
+        },
+        {
+          "id": "logistica.delivery-route",
+          "label": "Rutas de entrega",
+          "pageId": "logistica.delivery-route",
+          "order": 0,
+          "path": "delivery-route",
+          "permission": "subject.logistica.delivery-route.read",
+          "icon": "document"
+        },
+        {
+          "id": "logistica.delivery-package-manifiesto",
+          "label": "Manifiesto de carga",
+          "pageId": "logistica.delivery-package-manifiesto",
+          "order": 1,
+          "path": "delivery-package-manifiesto",
+          "permission": "subject.logistica.delivery-package-manifiesto.read",
+          "icon": "document"
+        },
+        {
+          "id": "logistica.delivery-route-mapa",
+          "label": "Mapa de rutas",
+          "pageId": "logistica.delivery-route-mapa",
+          "order": 2,
+          "path": "delivery-route-mapa",
+          "permission": "subject.logistica.delivery-route-mapa.read",
+          "icon": "document"
+        },
+        {
+          "id": "logistica.reparto",
+          "label": "Reparto (chofer)",
+          "pageId": "logistica.reparto",
+          "order": 3,
+          "path": "reparto",
+          "permission": "subject.logistica.reparto.read",
+          "icon": "document"
+        },
+        {
+          "id": "logistica.entregas",
+          "label": "Cola chofer (carga/entrega)",
+          "pageId": "logistica.entregas",
+          "order": 4,
+          "path": "entregas",
+          "permission": "subject.logistica.entregas.read",
+          "icon": "document"
+        },
+        {
+          "id": "logistica.delivery-return",
+          "label": "Devoluciones",
+          "pageId": "logistica.delivery-return",
+          "order": 5,
+          "path": "delivery-return",
+          "permission": "subject.logistica.delivery-return.read",
+          "icon": "document"
+        }
+      ]
+    }
+  ],
   "pages": [
     {
       "id": "logistica.delivery-return",
@@ -121,90 +202,18 @@
       "permission": "subject.logistica.delivery-route-mapa.read"
     }
   ],
-  "menu": [
-    {
-      "id": "logistica.root",
-      "label": "Logística",
-      "order": 0,
-      "children": [
-        {
-          "id": "logistica.pedidos",
-          "label": "Pedidos por empacar",
-          "order": -1,
-          "pageId": "logistica.pedidos",
-          "path": "pedidos",
-          "permission": "subject.logistica.pedidos.read"
-        },
-        {
-          "id": "logistica.delivery-package",
-          "label": "Bultos",
-          "order": 0,
-          "pageId": "logistica.delivery-package",
-          "path": "delivery-package",
-          "permission": "subject.logistica.delivery-package.read"
-        },
-        {
-          "id": "logistica.delivery-route",
-          "label": "Rutas de entrega",
-          "order": 0,
-          "pageId": "logistica.delivery-route",
-          "path": "delivery-route",
-          "permission": "subject.logistica.delivery-route.read"
-        },
-        {
-          "id": "logistica.delivery-package-manifiesto",
-          "label": "Manifiesto de carga",
-          "order": 1,
-          "pageId": "logistica.delivery-package-manifiesto",
-          "path": "delivery-package-manifiesto",
-          "permission": "subject.logistica.delivery-package-manifiesto.read"
-        },
-        {
-          "id": "logistica.delivery-route-mapa",
-          "label": "Mapa de rutas",
-          "order": 2,
-          "pageId": "logistica.delivery-route-mapa",
-          "path": "delivery-route-mapa",
-          "permission": "subject.logistica.delivery-route-mapa.read"
-        },
-        {
-          "id": "logistica.reparto",
-          "label": "Reparto (chofer)",
-          "order": 3,
-          "pageId": "logistica.reparto",
-          "path": "reparto",
-          "permission": "subject.logistica.reparto.read"
-        },
-        {
-          "id": "logistica.entregas",
-          "label": "Cola chofer (carga/entrega)",
-          "order": 4,
-          "pageId": "logistica.entregas",
-          "path": "entregas",
-          "permission": "subject.logistica.entregas.read"
-        },
-        {
-          "id": "logistica.delivery-return",
-          "label": "Devoluciones",
-          "order": 5,
-          "pageId": "logistica.delivery-return",
-          "path": "delivery-return",
-          "permission": "subject.logistica.delivery-return.read"
-        }
-      ]
-    }
-  ],
   "storage": {
-    "domain": "shared-nox-postgres"
+    "domain": "shared-nox-postgres",
+    "files": false
   },
   "resources": {
-    "delivery-return": "delivery_return",
-    "delivery-package": "delivery_package",
+    "delivery-return": "delivery-return",
+    "delivery-package": "delivery-package",
     "pedidos": "pedidos",
-    "delivery-package-manifiesto": "delivery_package_manifiesto",
+    "delivery-package-manifiesto": "delivery-package-manifiesto",
     "reparto": "reparto",
     "entregas": "entregas",
-    "delivery-route": "delivery_route",
-    "delivery-route-mapa": "delivery_route_mapa"
+    "delivery-route": "delivery-route",
+    "delivery-route-mapa": "delivery-route-mapa"
   }
 }
