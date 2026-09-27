@@ -215,5 +215,10 @@
     "entregas": "entregas",
     "delivery-route": "delivery-route",
     "delivery-route-mapa": "delivery-route-mapa"
-  }
+  },
+  "dependsOn": [
+    "subject-ventas",
+    "subject-almacen",
+    "subject-vehiculos"
+  ]
 }
