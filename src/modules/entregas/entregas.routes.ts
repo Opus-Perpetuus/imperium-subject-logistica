@@ -1,5 +1,6 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
 import { entregas_pages } from "./entregas.pages.ts";
+import { salida_routes } from "./entregas.salida.ts";
 import { entregas_tables } from "./entregas.tables.ts";
 
 export const entregas_module = define_module({
@@ -10,7 +11,7 @@ export const entregas_module = define_module({
     read: "Ver Cola chofer (carga/entrega)",
     write: "Editar Cola chofer (carga/entrega)",
   },
-  routes: define_crud({
+  routes: [...salida_routes, ...define_crud({
     resource: "entregas",
     table: "entregas",
     soft_delete: true,
@@ -66,7 +67,7 @@ export const entregas_module = define_module({
       logistics_events: { type: "json" },
     },
     options_map: { value: "id", label: "name" },
-  }),
+  })],
   tables: entregas_tables,
   pages: entregas_pages,
   menu: [],
