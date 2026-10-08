@@ -206,6 +206,41 @@ describe("entregas salida", () => {
     );
   });
 
+  test("POST guarda en el evento depart la ubicación de la salida", async () => {
+    await with_rows([bulto({ id: "b1" }), bulto({ id: "b2" })], async (server, data) => {
+      await post_salida(server, {
+        ids: ["b1"],
+        depart_coordinates: { latitude: 20.55, longitude: -103.2 },
+        depart_gps_status: "ok",
+        depart_gps_accuracy_m: 8,
+        estado: "entregado",
+      });
+      await post_salida(server, {
+        ids: ["b2"],
+        depart_gps_status: "sin_gps",
+        depart_gps_missing_reason: "Sin señal",
+        depart_coordinates: { latitude: "x", longitude: 1 },
+      });
+
+      const uno = await data.findOne("delivery_package", { id: "b1" });
+      expect(uno?.estado).toBe("en_ruta");
+      expect((uno?.logistics_events as Row[])[0]).toMatchObject({
+        event_type: "depart",
+        depart_coordinates: { latitude: 20.55, longitude: -103.2 },
+        depart_gps_status: "ok",
+        depart_gps_accuracy_m: 8,
+      });
+
+      const dos = (await data.findOne("delivery_package", { id: "b2" }))
+        ?.logistics_events as Row[];
+      expect(dos[0]).toMatchObject({
+        depart_gps_status: "sin_gps",
+        depart_gps_missing_reason: "Sin señal",
+      });
+      expect(dos[0]).not.toHaveProperty("depart_coordinates");
+    });
+  });
+
   test("POST sobre en_ruta es idempotente", async () => {
     const previo = {
       event_id: "prev",

@@ -38,6 +38,33 @@ function texto_ids(body: unknown): string[] {
   return ids;
 }
 
+function numero(raw: unknown): number | null {
+  return typeof raw === "number" && Number.isFinite(raw) ? raw : null;
+}
+
+/** Ubicación al salir a ruta. Solo pasan los campos `depart_*` bien formados. */
+function gps_salida(body: unknown): Record<string, unknown> {
+  if (!body || typeof body !== "object" || Array.isArray(body)) return {};
+  const raw = body as Record<string, unknown>;
+  const gps: Record<string, unknown> = {};
+  const punto = raw.depart_coordinates as Record<string, unknown> | null | undefined;
+  const latitude = numero(punto?.latitude);
+  const longitude = numero(punto?.longitude);
+  if (latitude !== null && longitude !== null) {
+    gps.depart_coordinates = { latitude, longitude };
+  }
+  if (raw.depart_gps_status === "ok" || raw.depart_gps_status === "sin_gps") {
+    gps.depart_gps_status = raw.depart_gps_status;
+  }
+  const motivo = typeof raw.depart_gps_missing_reason === "string"
+    ? raw.depart_gps_missing_reason.trim()
+    : "";
+  if (motivo) gps.depart_gps_missing_reason = motivo;
+  const precision = numero(raw.depart_gps_accuracy_m);
+  if (precision !== null) gps.depart_gps_accuracy_m = precision;
+  return gps;
+}
+
 function eventos_de(raw: unknown): unknown[] {
   if (!Array.isArray(raw)) return [];
   return [...raw];
@@ -97,7 +124,9 @@ async function listar_salida(ctx: KirletCtx) {
 }
 
 async function marcar_salida(ctx: KirletCtx) {
-  const ids = texto_ids(await ctx.body());
+  const body = await ctx.body();
+  const ids = texto_ids(body);
+  const gps = gps_salida(body);
   if (!ids.length) {
     return ctx.fail("validation_error", "Indica al menos un bulto", 400);
   }
@@ -127,6 +156,7 @@ async function marcar_salida(ctx: KirletCtx) {
         created_at: new Date().toISOString(),
         source: "online",
         actor: ctx.actor ?? "",
+        ...gps,
       };
       const patch = {
         estado: "en_ruta",
