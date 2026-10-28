@@ -71,17 +71,9 @@ export const delivery_package_manifiesto_pages: KirletPageDecl[] = [
               { name: "pedido_total_bultos", component: "input-number", label: "pedido total bultos" },
               {
                 name: "estado",
-                component: "input-menu",
-                label: "estado",
-                options: [
-                  { value: "pendiente", label: "Pendiente" },
-                  { value: "asignado", label: "Asignado" },
-                  { value: "cargado", label: "Cargado" },
-                  { value: "en_ruta", label: "En ruta" },
-                  { value: "entregado", label: "Entregado" },
-                  { value: "incidencia", label: "Incidencia" },
-                  { value: "cancelado", label: "Cancelado" },
-                ],
+                component: "input-status",
+                label: "Estado",
+                // Opciones: status-option-control (seed en status-seeds.ts; lista compartida).
               },
               { name: "latitude", component: "input-number", label: "latitude", min: -90, max: 90 },
               { name: "longitude", component: "input-number", label: "longitude", min: -180, max: 180 },

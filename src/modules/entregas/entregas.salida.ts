@@ -1,4 +1,5 @@
 import { define_routes, type KirletCtx } from "@opus-perpetuus/imperium-core-kit";
+import { LOGISTICS_STATUS } from "../../status-options.ts";
 
 const TABLE = "delivery_package";
 
@@ -71,16 +72,16 @@ function eventos_de(raw: unknown): unknown[] {
 }
 
 function rechazo_salida(estado: string): string | null {
-  if (estado === "cancelado") {
+  if (estado === LOGISTICS_STATUS.cancelado) {
     return "No puedes operar logística sobre un bulto anulado";
   }
-  if (estado === "entregado") {
+  if (estado === LOGISTICS_STATUS.entregado) {
     return "Este bulto ya fue entregado";
   }
-  if (estado === "incidencia") {
+  if (estado === LOGISTICS_STATUS.incidencia) {
     return "No puedes marcar salida a ruta sobre un bulto marcado como incidencia";
   }
-  if (estado !== "cargado" && estado !== "en_ruta") {
+  if (estado !== LOGISTICS_STATUS.cargado && estado !== LOGISTICS_STATUS.en_ruta) {
     return "Solo puedes marcar salida a ruta de un bulto cargado. Registra la carga primero.";
   }
   return null;
@@ -105,7 +106,7 @@ async function listar_salida(ctx: KirletCtx) {
   }
   const rows = await ctx.repo(TABLE).findMany({
     where: {
-      estado: "cargado",
+      estado: LOGISTICS_STATUS.cargado,
       vehicle: { in: vehicles },
     },
   });
@@ -146,7 +147,7 @@ async function marcar_salida(ctx: KirletCtx) {
         errors.push({ id, message: rechazo });
         continue;
       }
-      if (estado === "en_ruta") {
+      if (estado === LOGISTICS_STATUS.en_ruta) {
         data.push(row);
         continue;
       }
@@ -159,7 +160,7 @@ async function marcar_salida(ctx: KirletCtx) {
         ...gps,
       };
       const patch = {
-        estado: "en_ruta",
+        estado: LOGISTICS_STATUS.en_ruta,
         logistics_events: [...eventos_de(row.logistics_events), evento],
         last_logistics_event_type: "depart",
       };
